@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lab3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/classes/bi/zum/lab3.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../jgraph-search-gui-0.7.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
