@@ -13,12 +13,15 @@ import java.util.Random;
  */
 public class Population extends AbstractPopulation {
 
+    private Random random;
+
     public Population(AbstractEvolution evolution, int size) {
         individuals = new Individual[size];
         for (int i = 0; i < individuals.length; i++) {
             individuals[i] = new Individual(evolution, true);
             individuals[i].computeFitness();
         }
+        this.random = new Random();
     }
 
     /**
@@ -30,15 +33,22 @@ public class Population extends AbstractPopulation {
     public List<AbstractIndividual> selectIndividuals(int count) {
         ArrayList<AbstractIndividual> selected = new ArrayList<AbstractIndividual>();
 
-        // example of random selection of N individuals
-        Random r = new Random();
-        AbstractIndividual individual = individuals[r.nextInt(individuals.length)];
-        while (selected.size() < count) {
-            selected.add(individual);
-            individual = individuals[r.nextInt(individuals.length)];
+        for(int i=0; i<count; i++) {
+
+            double bestFitness = Double.NEGATIVE_INFINITY;
+            AbstractIndividual winner = null;
+
+            for(int k=0; k<10; k++) {
+
+                AbstractIndividual candidate = this.individuals[random.nextInt(this.individuals.length)];
+                if(candidate.getFitness() > bestFitness) {
+                    winner = candidate;
+                    bestFitness = candidate.getFitness();
+                }
+            }
+
+            selected.add(winner);
         }
-        
-        // TODO: implement your own (and better) method of selection
 
         return selected;
     }
